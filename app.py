@@ -14,6 +14,21 @@ n_temps = 0
 
 @app.route("/")
 def welcome():
+    """
+        Assumptions: Only process tweets with geo tags
+
+        Acceptance Criteria:
+        1. The number of tweets to calculate the sliding average over should be configurable at
+            startup time. The input value n should be between 2 and 100.
+        2. The output of your mini-pipeline should be 2 files, one for the stream of temperatures in
+            fahrenheit and 1 file for the stream of the sliding averages.
+            a. For this AC. I copied output "Tweet location: Palms - United States of America, temp_f: 73.9, avg of last 5: 73.9"
+                which reflects both the stream of temperatures and the sliding average. I understand it was not an example output.
+                I used the format for simplicity.
+
+        3. Diagram a. I used a simple flask app deployed on heroku. b. In production, we could deploy this app on AWS
+        Lambda with API Gateway, or an EC2 as I'm doing a read write stream on a text file on disk.
+    """
     if os.path.exists("tweet_temperature_stream.txt"):
         os.remove("tweet_temperature_stream.txt")
     else:
@@ -27,22 +42,6 @@ def welcome():
 
 @app.route("/start")
 def start():
-    """
-        Assumptions: Only process tweets with geo tags
-
-        Acceptance Criteria:
-        1. The number of tweets to calculate the sliding average over should be configurable at
-            startup time. The input value n should be between 2 and 100.
-        2. The output of your mini-pipeline should be 2 files, one for the stream of temperatures in
-            fahrenheit and 1 file for the stream of the sliding averages.
-            a. For this AC. I copied output "Tweet location: Palms - United States of America, temp_f: 73.9, avg of last 5: 73.9"
-                which reflects both the stream of temperatures and the sliding average. I understand it was not an example output.
-                I used the format for simplicity.
-
-        3. Diagram
-            a. I used a simple flask app deployed on heroku.
-    """
-
     global n_temps
     n = request.args.get('n')
     if n is None:
