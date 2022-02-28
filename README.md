@@ -19,11 +19,25 @@ I did not further try to resolve the heroku timeout issues.
 
 To use this, 
 1. clone the repo.
-2. populate API keys in config.py
-3. run the flask app with ```flask run``` 
-4. navigate to http://localhost:5000
-5. start the stream by http://localhost:5000/start?n=
-6. wait a few moments and then navigate to http://localhost:5000/stream the text output will begin shortly.
+2. create config.py
+3.  populate config vals. 
+```
+# Twitter API
+API_KEY = ''
+API_SECRET = ''
+BEARER_TOKEN = ''
+ACCESS_TOKEN = ''
+ACCESS_TOKEN_SECRET = ''
+TWITTER_API_URL = 'https://api.twitter.com/2/tweets/sample/stream'
+
+# Weather API
+WEATHER_API_KEY = ''
+WEATHER_API_URL = 'http://api.weatherapi.com/v1'
+```
+4. run the flask app with ```flask run``` 
+5. navigate to http://localhost:5000
+6. start the stream by http://localhost:5000/start?n=
+7. wait a few moments and then navigate to http://localhost:5000/stream the text output will begin shortly.
   
 Output in browser should look like:
 ```
