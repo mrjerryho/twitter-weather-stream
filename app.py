@@ -2,7 +2,7 @@ import json
 from collections import deque
 from time import sleep
 import requests
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for
 import config
 import os
 
@@ -21,6 +21,7 @@ def welcome():
     global n_temps
     # Application is gated on when n_temps == 0
     n_temps = 0
+    print('Setting n_temps to zero {}'.format(n_temps))
     return render_template('index.html')
 
 
@@ -202,9 +203,10 @@ def find_centroid(bbox):
     return centroid
 
 
-@app.route('/stream')
+@app.route("/stream")
 def stream():
     def generate():
+        yield "Starting stream: \n"
         with open('tweet_temperature_stream.txt') as f:
             while True:
                 yield f.read()
